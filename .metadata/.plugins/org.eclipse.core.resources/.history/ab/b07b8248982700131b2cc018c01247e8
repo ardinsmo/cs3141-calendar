@@ -1,0 +1,85 @@
+package main;
+
+import java.util.*;
+
+public class Event {
+	private String name;
+	private String description;
+	private Calendar startDate;
+	private Calendar endDate;
+	private String location;
+
+	Event(String n){
+		name=n;
+		description="";
+		Calendar now = Calendar.getInstance();
+		System.out.println(now.get(Calendar.HOUR_OF_DAY));
+		startDate = Calendar.getInstance();
+		endDate = Calendar.getInstance();
+		startDate.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DATE), (now.get(Calendar.HOUR_OF_DAY)+1), 0);
+		endDate.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DATE), (now.get(Calendar.HOUR_OF_DAY)+2), 0);
+		location="";
+	}
+	Event(String n, String d){
+		name=n;
+		description=d;
+		Calendar now = Calendar.getInstance();
+		startDate = Calendar.getInstance();
+		endDate = Calendar.getInstance();
+		startDate.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DATE), now.get(Calendar.HOUR_OF_DAY)+1, 00);
+		endDate.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DATE), now.get(Calendar.HOUR_OF_DAY)+2, 00);
+		location="";
+	}
+	Event(String n, String d, String l){
+		name=n;
+		description=d;
+		Calendar now = Calendar.getInstance();
+		startDate = Calendar.getInstance();
+		endDate = Calendar.getInstance();
+		startDate.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DATE), now.get(Calendar.HOUR_OF_DAY)+1, 00);
+		endDate.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DATE), now.get(Calendar.HOUR_OF_DAY)+2, 00);
+		location=l;
+	}
+	Event(String n, String d, String l,Calendar start){
+		name=n;
+		description=d;
+		//Calendar now = Calendar.getInstance();
+		startDate = Calendar.getInstance();
+		endDate = Calendar.getInstance();
+		startDate=start;
+		endDate.set(start.get(Calendar.YEAR), start.get(Calendar.MONTH), start.get(Calendar.DATE), start.get(Calendar.HOUR_OF_DAY)+1, start.get(Calendar.MINUTE));
+		location=l;
+	}
+	Event(String n, String d, String l,Calendar start, Calendar end){
+		name=n;
+		description=d;
+		//Calendar now = Calendar.getInstance();
+		startDate = Calendar.getInstance();
+		endDate = Calendar.getInstance();
+		startDate=start;
+		endDate=end;
+		location=l;
+	}
+	
+	void print(){
+		System.out.println("Event Name: "+ name);
+		System.out.println("Description: "+description);
+		System.out.println("Start Date: "+dateToString(startDate));
+		System.out.println("End Date: "+dateToString(endDate));
+		System.out.println("Location: "+location);
+	}
+	String dateToString(Calendar d){
+		String temp = new String(d.get(Calendar.YEAR)+"/"+ d.get(Calendar.MONTH)+"/"+ d.get(Calendar.DATE)+" "+ d.get(Calendar.HOUR_OF_DAY)+":"+ d.get(Calendar.MINUTE));
+		if(d.get(Calendar.HOUR_OF_DAY)<12){
+			temp = temp + " AM";
+		} else {
+			temp = temp + " PM";
+		}
+		return temp;
+	}
+	
+	void setTime(int startHour, int startMinute,int endHour, int endMinute){
+		startDate.set(startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DATE), startHour, startMinute);
+		endDate.set(endDate.get(Calendar.YEAR), endDate.get(Calendar.MONTH), endDate.get(Calendar.DATE), endHour, endMinute);
+	}
+}

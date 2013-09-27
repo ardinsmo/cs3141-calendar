@@ -1,0 +1,83 @@
+package main;
+
+import java.util.*;
+
+public class MyCalendar {
+	private ArrayList<Month> months;
+
+	MyCalendar(){
+		months = new ArrayList<Month>();
+	}
+
+	ArrayList<Month> getMonths(){
+		return months;
+	}
+
+	Day getDay(int year, int month, int day){
+		System.out.println(month + " "+day/7+ " "+day%7);
+		return months.get(month-1).getWeeks().get(day/7-1).getDays().get(day%7-1);
+	}
+	void createEvent(Scanner in){
+		System.out.print("Please enter event title: ");
+		String title = in.nextLine();
+		System.out.print("Please enter event description: ");
+		String description = in.nextLine();
+		System.out.println("Do you want to specifiy a date?");
+		String dateValid = in.nextLine();
+		if(dateValid.compareTo("yes")==0){
+			System.out.println("Please specifiy a start year: ");
+			int year = in.nextInt();
+			System.out.println("Please specify a start month (int): ");
+			int month = in.nextInt();
+			System.out.println("Please specify a start day");
+			int day = in.nextInt();
+			Calendar today = Calendar.getInstance();
+			today.set(year, month, day);
+			System.out.println("Do you want to specify a specific end date?");
+			String endDateYes = in.nextLine();
+			 endDateYes = in.nextLine();
+			Day theDay = getDay(year,month,day);
+			if(endDateYes.compareTo("yes")==0){
+				System.out.println("Please specifiy a end year: ");
+				int endyear = in.nextInt();
+				System.out.println("Please specify a end month (int): ");
+				int endmonth = in.nextInt();
+				System.out.println("Please specify a end day");
+				int endday = in.nextInt();
+				Calendar tomorrow = Calendar.getInstance();
+				tomorrow.set(endyear, endmonth, endday);
+				theDay.addEvent(new Event(title, description,today,tomorrow)).print();
+			}else{
+				theDay.addEvent(new Event(title, description,today)).print();
+			}
+		}else{
+			Calendar today = Calendar.getInstance();
+			Day theDay = getDay(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DATE));
+			theDay.addEvent(new Event(title,description)).print();
+
+		}
+	}
+
+	public static void main(String [ ] args){
+		MyCalendar me = new MyCalendar();
+		for(int i=1;i<=12;i++){
+			Month temp = new Month(i);
+			me.getMonths().add(temp);
+			//temp.print();
+		}
+
+		System.out.println("Welcome to ourCalendar!");
+		Scanner in = new Scanner(System.in);
+		String input = in.nextLine();
+		while (input.compareTo("exit")!=0){
+
+			if(input.compareTo("create event")==0){
+				me.createEvent(in);
+				System.out.println("Good for you!");
+			}
+			input = in.nextLine();
+		}
+		me.months.get(2).getWeeks().get(1).getDays().get(6).addEvent(new Event("Hello"));
+		me.months.get(2).getWeeks().get(1).getDays().get(6).getEvents().get(0).print();
+	}
+}

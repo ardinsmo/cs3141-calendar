@@ -1,0 +1,77 @@
+package sqlHandeler;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+/**
+ * 
+ */
+
+/**
+ * This class is an event.
+ * It stores all relevant information
+ * 	@author mmandres
+ *
+ */
+public class EventModel {
+	private String name;
+	private Date startDate;// = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(originalString);
+	private Date endDate;
+	private String description;
+	private String location;
+	
+	public EventModel(){
+		this.name = "Test";
+		this.startDate = new Date(System.currentTimeMillis()); // need to change to 
+		this.endDate = new Date(System.currentTimeMillis()); // get from input;
+		this.description = "Test Description";
+		this.location = "Test location";
+	}
+	public EventModel(String name, String startDate, String endDate, String description, String location){
+		this.name = name;
+		this.startDate = new Date(System.currentTimeMillis()); // need to change to 
+		this.endDate = new Date(System.currentTimeMillis()); // get from input;
+		this.description = description;
+		this.location = location;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+}

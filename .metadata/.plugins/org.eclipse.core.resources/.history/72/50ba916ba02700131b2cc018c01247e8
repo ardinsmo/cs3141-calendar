@@ -1,0 +1,102 @@
+package main;
+
+import java.io.*;
+
+import sqlHandeler.CalendarModel;
+import sqlHandeler.EventModel;
+
+
+public class EventHandler {
+
+    /**
+     * Example purely for entering the data of an Event
+     * @param args
+     */
+    @SuppressWarnings("deprecation")
+    public static void main(String[] args) {
+
+        System.out.println("Enter the name of the Event:\n");
+
+        //open up standard input
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int duration = 0;
+        String name = null , Sdate = null, Description = null, location = null;
+        java.util.Date date = null;
+        try {
+            name = br.readLine();
+
+
+            System.out.println("\nEnter date(MMDDYYYY):\n");
+            String tempMonth, tempDay, tempYear, tempHour, tempMin;
+            Sdate = br.readLine();
+            if(Sdate.length()!=8){
+            	System.out.println("Please enter a valid date");
+            	Sdate = br.readLine();
+            }
+            tempMonth = Sdate.substring(0, 2);
+            tempDay = Sdate.substring(2, 4);
+            tempYear = Sdate.substring(4, 8);
+
+            if(tempYear.charAt(0) == '1'){
+                tempYear = tempYear.substring(2, tempYear.length());
+                System.out.println(tempYear);
+            } else if(tempYear.substring(0,2).equals("20")){
+                tempYear =Integer.toString((Integer.parseInt(tempYear) - 1900));
+            }
+            date = new java.util.Date(Integer.parseInt(tempYear),
+                    Integer.parseInt(tempMonth) - 1,
+                    Integer.parseInt(tempDay));
+            System.out.println("\nEnter beginning hour at which te Event starts:\n");
+
+            tempHour = br.readLine();
+
+            System.out.println("\nEnter the minute at which the Event Starts:\n");
+
+            tempMin = br.readLine();
+
+            date.setHours(Integer.parseInt(tempHour));
+            date.setMinutes(Integer.parseInt(tempMin));
+
+            System.out.println("\nEnter how long the Duration of the meeting is in hours:\n");
+            String Duration = br.readLine();
+            duration = Integer.parseInt(Duration);
+
+            System.out.println("Enter a description of the Event:\n");
+            Description = br.readLine();
+            
+            System.out.println("Enter a location for the Event:\n");
+            location = br.readLine();
+
+            if(Description.length() > 279){
+                Description = Description.substring(0,279);
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        System.out.println(date.toString());
+
+        //SQL handler
+        EventModel test = new EventModel(name,date.toString(),date.toString(),Description,location);
+		CalendarModel.addEvent(test);
+
+      /*  BufferedWriter writer = null;
+        try {
+            // writes into the workspace directory of this project
+            writer = new BufferedWriter(new FileWriter("./output.txt"));
+            writer.write(name + "," + date.toString() + "," + duration + "," + Description + "\n");
+        } catch (IOException e) {
+            System.err.println(e);
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    System.err.println(e);
+                }
+            }
+        }*/
+    }
+}
