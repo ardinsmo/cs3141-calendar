@@ -1,0 +1,31 @@
+package main;
+
+import java.util.*;
+
+public class MyCalendar {
+	private ArrayList<Month> months;
+	
+	MyCalendar(){
+		months = new ArrayList<Month>();
+	}
+	
+	ArrayList<Month> getMonths(){
+		return months;
+	}
+	
+	public static void main(String [ ] args){
+		MyCalendar me = new MyCalendar();
+		for(int i=1;i<=12;i++){
+			Month temp = new Month(i);
+			me.getMonths().add(temp);
+			temp.print();
+		}
+		Scanner in = new Scanner(System.in);
+		String input = in.next();
+		while (input.compareTo("exit")!=1){
+			input = in.next();
+		}
+		me.months.get(2).getWeeks().get(1).getDays().get(6).addEvent(new Event("Hello"));
+		me.months.get(2).getWeeks().get(1).getDays().get(6).getEvents().get(0).print();
+	}
+}

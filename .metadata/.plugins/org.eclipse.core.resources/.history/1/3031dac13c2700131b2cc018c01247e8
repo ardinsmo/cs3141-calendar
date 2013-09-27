@@ -1,0 +1,45 @@
+package main;
+
+import java.util.*;
+
+public class MyCalendar {
+	private ArrayList<Month> months;
+	
+	MyCalendar(){
+		months = new ArrayList<Month>();
+	}
+	
+	ArrayList<Month> getMonths(){
+		return months;
+	}
+	
+	void createEvent(Scanner in){
+		System.out.print("Please enter event title: ");
+		String title = in.nextLine();
+		System.out.print("Please enter event description: ");
+		String description = in.nextLine();
+		System.out.println("Do you want to specifiy a date?");
+		boolean dateValid = in.nextBoolean();
+	}
+	
+	public static void main(String [ ] args){
+		MyCalendar me = new MyCalendar();
+		for(int i=1;i<=12;i++){
+			Month temp = new Month(i);
+			me.getMonths().add(temp);
+			temp.print();
+		}
+		Scanner in = new Scanner(System.in);
+		String input = in.nextLine();
+		while (input.compareTo("exit")!=0){
+			
+			if(input.compareTo("create event")==0){
+				me.createEvent(in);
+				System.out.println("Good for you!");
+			}
+			input = in.nextLine();
+		}
+		me.months.get(2).getWeeks().get(1).getDays().get(6).addEvent(new Event("Hello"));
+		me.months.get(2).getWeeks().get(1).getDays().get(6).getEvents().get(0).print();
+	}
+}

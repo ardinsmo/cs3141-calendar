@@ -8,3 +8,9 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86 -data /Users/thecrazycam
 
 !ENTRY org.eclipse.core.net 1 0 2013-09-27 02:03:28.903
 !MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2013-09-27 02:08:09.430
+!MESSAGE Registering: com.google.appengine.eclipse.sdkbundle_1.8.4
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2013-09-27 02:08:09.711
+!MESSAGE Registering: com.google.gwt.eclipse.sdkbundle_2.5.1
